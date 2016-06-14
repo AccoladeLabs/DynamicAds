@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    Accolade
+ * @package     Accolade_Dynamicads
+ * @author	    Akash Verma <akash@accolade.com>
+ * @copyright   Copyright (c) 2015 Accolade. (http://www.accolade.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <accolade_dynamicads translate="title" module="accolade_dynamicads">
+                                        <title>Magefi Dynamicads</title>
+                                    </accolade_dynamicads>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

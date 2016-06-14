@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<config>
+	
+    <sections>
+        <accolade_dynamicads translate="label" module="accolade_dynamicads">
+            <label>Dynamic Ads</label>
+            <tab>accolade</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <wca translate="label">
+                    <label>WCA</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable WCA</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+						<pixel_id translate="label">
+                            <label>Pixel Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pixel_id>
+					</fields>
+                </wca>
+				<google_dynx>
+					<label>Google Dynamic Remarketing</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Google Dynamic Remarketing</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+						<snippet translate="label">
+                            <label>Remarketing Code</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </snippet>
+					</fields>
+				</google_dynx>
+            </groups>
+        </accolade_dynamicads>
+    </sections>
+</config>

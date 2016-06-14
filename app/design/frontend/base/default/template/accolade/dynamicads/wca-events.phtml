@@ -1,0 +1,77 @@
+<?php
+$configData = Mage::getStoreConfig('accolade_dynamicads');
+// for getting page type
+$page_type = $this->getRequest()->getModuleName().$this->getRequest()->getControllerName().$this->getRequest()->getActionName();
+$cartItems = Mage::getSingleton('checkout/session')->getQuote()->getAllItems();
+$currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+if($configData['wca']['enabled'] || $configData['wca']['pixel_id']!=''){ //is wca enabled
+?>
+<!-- Accolade Facebook Pixel Code -->
+<script>
+<?php if($page_type == 'catalogproductview'):
+$product = Mage::registry('current_product');
+?>
+<?php if($product):?>
+fbq('track', 'ViewContent', {
+  content_name: '<?php echo $product->getName();?>',
+  content_category: '<?php echo Mage::app()->getStore()->getName();?> Products',
+  content_ids: ['<?php echo $product->getSku();?>'],
+  content_type: 'product',
+  value: <?php echo round(Mage::helper('core')->currency($product->getFinalPrice(), false, false),2);?>,
+  currency: '<?php echo $currency_code;?>'
+ });
+<?php endif;?>
+
+<?php endif;?>
+<?php if(strpos($_SERVER['REQUEST_URI'],'success')==true):?>
+<?php 
+$lastOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+$order = Mage::getModel('sales/order')->load($lastOrderId);
+?>
+<?php if($order && $order->getId()):?>
+fbq('track', 'Purchase', {
+  content_ids: [<?php foreach($order->getAllItems() as $item) { echo "'".$item->getSku()."',";	}?>],
+  content_type: 'product',
+  value: <?php echo $order->getGrandTotal();?>,
+  currency: '<?php echo $order->getOrderCurrencyCode(); ?>'
+});
+<?php endif;?>
+<?php endif;?>
+<?php $_cartproduct = Mage::getModel('core/session')->getProductToShoppingCart() ?>
+<?php if ($_cartproduct && $_cartproduct->getId()): ?>
+fbq('track', 'AddToCart', {
+  content_name: 'Shopping Cart',
+  content_ids: ['<?php echo $_cartproduct->getSku();?>'],
+  content_type: 'product',
+  value: <?php echo round(Mage::helper('core')->currency($_cartproduct->getPrice(), false, false),2);?>,
+  currency: '<?php echo $currency_code;?>'
+});    
+<?php Mage::getModel('core/session')->unsProductToShoppingCart(); ?>
+<?php endif; ?>
+</script>
+<!-- End Accolade Facebook Pixel Code -->
+<?php } //is wca enabled?>
+
+<?php if($configData['google_dynx']['enabled'] || $configData['google_dynx']['snippet']!=''){ //is google_dynx enabled?>
+<?php if($page_type == 'catalogproductview'):
+$product = Mage::registry('current_product');
+?>
+
+<?php if($product):?>
+<?php 
+$dynx = $configData['google_dynx']['snippet'];
+$dynx = str_replace('{{sku}}',$product->getSku(),$dynx);
+$dynx = str_replace('{{price}}',round(Mage::helper('core')->currency($product->getFinalPrice(), false, false),2),$dynx);
+?>
+<!-- Accolade Dynx Pixel Code -->
+<?php echo $dynx;?>
+<!-- End Accolade Dynx Pixel Code -->
+<?php endif;?>
+
+<?php endif;?>
+
+<?php } //is google_dynx enabled?>
+
+
+
+

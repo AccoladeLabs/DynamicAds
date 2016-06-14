@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Accolade_Dynamicads>
+			<version>0.1.0</version>
+		</Accolade_Dynamicads>
+	</modules>
+
+	<global>
+		<helpers>
+			<accolade_dynamicads>
+				<class>Accolade_Dynamicads_Helper</class>
+			</accolade_dynamicads>
+		</helpers>
+		<blocks>
+			<accolade_dynamicads>
+				<class>Accolade_Dynamicads_Block</class>
+			</accolade_dynamicads>
+		</blocks>
+		<models>
+            <accolade_dynamicads>
+                <class>Accolade_Dynamicads_Model</class>
+            </accolade_dynamicads>
+        </models>
+	</global>
+
+	<frontend>
+		<layout>
+            <updates>
+                <accolade_dynamicads>
+                    <file>accolade_dynamicads.xml</file>
+                </accolade_dynamicads>
+            </updates>
+    	</layout>
+		<events>
+            <checkout_cart_add_product_complete>
+                <observers>
+                    <accolade_dynamicads_log_cart_add>
+                        <class>accolade_dynamicads/observer</class>
+                        <method>logCartAdd</method>
+                    </accolade_dynamicads_log_cart_add>
+                </observers>
+            </checkout_cart_add_product_complete>
+        </events>
+	</frontend>
+</config>
